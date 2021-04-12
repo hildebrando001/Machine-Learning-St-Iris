@@ -3,9 +3,6 @@ import streamlit as st
 from sklearn import datasets
 from sklearn.ensemble import RandomForestClassifier
 
-# CURRENT_THEME = "Custom Theme"
-# IS_DARK_THEME = False
-
 st.write("""
 # Iris Flower Prediction
 This app predict Iris flower type!
