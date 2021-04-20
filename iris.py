@@ -3,6 +3,7 @@ import streamlit as st
 from sklearn import datasets
 from sklearn.ensemble import RandomForestClassifier
 
+
 st.write("""
 # Iris Flower Prediction
 This app predict Iris flower type!
@@ -11,14 +12,14 @@ This app predict Iris flower type!
 st.sidebar.header('User Input Parameters')
 
 def user_input_features():
-    sepal_length = st.sidebar.slider('sepal_length', 4.3, 7.9, 5.4)
-    sepal_width  = st.sidebar.slider('sepal_width',  2.0, 4.4, 3.4)
-    petal_length = st.sidebar.slider('petal_length', 1.0, 6.9, 1.3)
-    petal_width  = st.sidebar.slider('petal_width',  0.1, 2.5, 0.2)
-    data = {'sepal_length':sepal_length,
-            'sepal_width' :sepal_width,
-            'petal_length':petal_length,
-            'petal_width' :petal_width}
+    sepal_length = st.sidebar.slider('Sepal length', 4.3, 7.9, 5.4)
+    sepal_width  = st.sidebar.slider('Sepal width',  2.0, 4.4, 3.4)
+    petal_length = st.sidebar.slider('Petal length', 1.0, 6.9, 1.3)
+    petal_width  = st.sidebar.slider('Petal width',  0.1, 2.5, 0.2)
+    data = {'Sepal length':sepal_length,
+            'Sepal width' :sepal_width,
+            'Petal length':petal_length,
+            'Petal width' :petal_width}
     features = pd.DataFrame(data, index=[0])
     return features
 
@@ -37,11 +38,22 @@ clf.fit(X, Y)
 prediction = clf.predict(df)
 prediction_proba = clf.predict_proba(df)
 
-st.subheader('Class labels and their corresponding index number')
-st.write(iris.target_names)
+# defining columns layout
+col1, col2 = st.beta_columns(2) # ([1, 2])
 
-st.subheader('Prediction')
-st.write(iris.target_names[prediction])
+# col1 content
+col1.subheader('Class labels')
+col1.write(iris.target_names)
 
-st.subheader('Prediction probability')
-st.write(prediction_proba)
+col1.subheader('Prediction')
+col1.write(iris.target_names[prediction])
+
+col1.subheader('Prediction probability')
+col1.write(prediction_proba)
+
+# col2 content
+col2.subheader(f"Iris {iris.target_names[prediction]}")
+
+
+# st.write(dir(st.sidebar))
+# col2.write(dir(col1))
